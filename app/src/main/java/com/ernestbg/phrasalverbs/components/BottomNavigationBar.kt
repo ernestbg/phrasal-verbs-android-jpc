@@ -14,7 +14,7 @@ import com.ernestbg.phrasalverbs.navigation.BottomNavItem
 fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
         BottomNavItem.Dictionary,
-        BottomNavItem.Statistics
+        BottomNavItem.Learn
     )
     NavigationBar {
         val navBackStackEntry by navController.currentBackStackEntryAsState()

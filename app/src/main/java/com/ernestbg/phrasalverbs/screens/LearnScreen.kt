@@ -10,8 +10,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun StatisticsScreen() {
+fun LearnScreen() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Statistics Screen", fontSize = 24.sp, textAlign = TextAlign.Center)
+        Text(text = "Learn Screen", fontSize = 24.sp, textAlign = TextAlign.Center)
     }
 }
