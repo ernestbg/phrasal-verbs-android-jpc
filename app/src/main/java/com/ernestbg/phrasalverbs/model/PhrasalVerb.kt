@@ -2,12 +2,20 @@ package com.ernestbg.phrasalverbs.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.ColumnInfo
 
-@Entity(tableName = "phrasal_verbs")
+
+@Entity(tableName = "PHRASAL_VERBS")
 data class PhrasalVerb(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "ID")
+    val id: Int = 0,
+
+    @ColumnInfo(name = "HEADWORD")
     val headword: String,
-    val guideword: String,
-    val meaning: String,
-    val example: String
+
+    @ColumnInfo(name = "PHONETICS")
+    val phonetics: String?
 )
+
+

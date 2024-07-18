@@ -1,5 +1,6 @@
 package com.ernestbg.phrasalverbs.repository
 
+import android.util.Log
 import com.ernestbg.phrasalverbs.data.PhrasalVerbDao
 import com.ernestbg.phrasalverbs.model.PhrasalVerb
 import kotlinx.coroutines.Dispatchers
@@ -13,4 +14,8 @@ class AppRepository @Inject constructor(private val phrasalVerbDao: PhrasalVerbD
     fun getAllPhrasalVerbs(): Flow<List<PhrasalVerb>> = phrasalVerbDao.getAllPhrasalVerbs()
         .flowOn(Dispatchers.IO)
         .conflate()
+
+    suspend fun insert(phrasalVerb: PhrasalVerb) {
+        phrasalVerbDao.insert(phrasalVerb)
+    }
 }

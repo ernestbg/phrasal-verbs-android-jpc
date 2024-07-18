@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import com.ernestbg.phrasalverbs.screens.MainScreen
 import com.ernestbg.phrasalverbs.ui.theme.PhrasalVerbsTheme
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

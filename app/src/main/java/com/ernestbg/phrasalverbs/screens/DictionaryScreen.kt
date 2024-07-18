@@ -17,12 +17,12 @@ import com.ernestbg.phrasalverbs.view_models.PhrasalVerbViewModel
 
 @Composable
 fun DictionaryScreen(viewModel: PhrasalVerbViewModel = hiltViewModel()) {
-    val phrasalVerbs by viewModel.phrasalVerbs.collectAsState()
+    /*val phrasalVerbs by viewModel.phrasalVerbs.collectAsState()
 
     LazyColumn {
         items(phrasalVerbs) { phrasalVerb ->
-            Text(text = phrasalVerb.guideword)
+            Text(text = phrasalVerb.headword)
             // Aquí puedes mostrar otros detalles del phrasal verb si es necesario
         }
-    }
+    }*/
 }

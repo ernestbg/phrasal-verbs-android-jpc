@@ -1,12 +1,15 @@
 package com.ernestbg.phrasalverbs.data
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.ernestbg.phrasalverbs.model.Definition
+import com.ernestbg.phrasalverbs.model.Example
 import com.ernestbg.phrasalverbs.model.PhrasalVerb
 
-@Database(entities = [PhrasalVerb::class], version = 1, exportSchema = false)
+@Database(entities = [PhrasalVerb::class, Definition::class, Example::class], version = 1, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun phrasalVerbDao(): PhrasalVerbDao
@@ -20,8 +23,10 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "phrasal-verbs.db"
-                ).createFromAsset("phrasal-verbs.db")
+                    "phrasal_verbs.db"
+                )
+                    .createFromAsset("phrasal_verbs.db")
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 instance
@@ -29,4 +34,5 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 }
+
 
