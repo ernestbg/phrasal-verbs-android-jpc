@@ -2,6 +2,7 @@ package com.ernestbg.phrasalverbs.di
 
 import android.content.Context
 import com.ernestbg.phrasalverbs.data.AppDatabase
+import com.ernestbg.phrasalverbs.data.DefinitionDao
 import com.ernestbg.phrasalverbs.data.PhrasalVerbDao
 import dagger.Module
 import dagger.Provides
@@ -26,5 +27,9 @@ object AppModule {
         return db.phrasalVerbDao()
     }
 
-
+    @Singleton
+    @Provides
+    fun provideDefinitionDao(db: AppDatabase): DefinitionDao {
+        return db.definitionDao()
+    }
 }

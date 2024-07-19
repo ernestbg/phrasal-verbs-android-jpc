@@ -13,6 +13,7 @@ import com.ernestbg.phrasalverbs.model.PhrasalVerb
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun phrasalVerbDao(): PhrasalVerbDao
+    abstract fun definitionDao(): DefinitionDao
 
     companion object {
         @Volatile

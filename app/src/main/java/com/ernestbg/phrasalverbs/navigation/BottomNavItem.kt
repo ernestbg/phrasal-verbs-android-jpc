@@ -6,6 +6,6 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomNavItem(val label: String, val icon: ImageVector, val route: String) {
-    object Dictionary : BottomNavItem("Diccionario", Icons.Filled.Search, "dictionary")
-    object Learn : BottomNavItem("Aprendizaje", Icons.Filled.Person, "learn")
+    data object Dictionary : BottomNavItem("Diccionario", Icons.Filled.Search, "dictionary")
+    data object Learn : BottomNavItem("Aprendizaje", Icons.Filled.Person, "learn")
 }

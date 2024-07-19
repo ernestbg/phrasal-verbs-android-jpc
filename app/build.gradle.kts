@@ -73,12 +73,16 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    //liveData
+    implementation ("androidx.compose.runtime:runtime-livedata:1.6.8")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.3")
+
     //dagger-hilt
     val hiltVers = "2.50"
     implementation("com.google.dagger:hilt-android:$hiltVers")
     implementation("com.google.dagger:hilt-android-gradle-plugin:$hiltVers")
     ksp("com.google.dagger:hilt-compiler:$hiltVers")
-    ksp("androidx.hilt:hilt-compiler:1.2.0") // 1.0.0 in course
+    ksp("androidx.hilt:hilt-compiler:1.2.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     //Room
@@ -95,5 +99,5 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${crVers}")
 
     //coroutine lifecycle scopes
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3") //2.4.0 in course
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3")
 }
