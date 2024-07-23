@@ -1,0 +1,190 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "a83404a90cec987a72d724012b223a00",
+    "entities": [
+      {
+        "tableName": "PHRASAL_VERBS",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `HEADWORD` TEXT NOT NULL, `PHONETICS` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "ID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "headword",
+            "columnName": "HEADWORD",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "phonetics",
+            "columnName": "PHONETICS",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "ID"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "DEFINITIONS",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `PHRASAL_VERB_ID` INTEGER NOT NULL, `GUIDEWORD` TEXT, `DIALECT` TEXT, `REGISTER` TEXT, `DEFINITION` TEXT, `TRANSLATION` TEXT, `LEVEL` TEXT, FOREIGN KEY(`PHRASAL_VERB_ID`) REFERENCES `PHRASAL_VERBS`(`ID`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "ID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "phrasalVerbId",
+            "columnName": "PHRASAL_VERB_ID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "guideword",
+            "columnName": "GUIDEWORD",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dialect",
+            "columnName": "DIALECT",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "register",
+            "columnName": "REGISTER",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "definition",
+            "columnName": "DEFINITION",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "translation",
+            "columnName": "TRANSLATION",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "level",
+            "columnName": "LEVEL",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "ID"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_DEFINITIONS_PHRASAL_VERB_ID",
+            "unique": false,
+            "columnNames": [
+              "PHRASAL_VERB_ID"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_DEFINITIONS_PHRASAL_VERB_ID` ON `${TABLE_NAME}` (`PHRASAL_VERB_ID`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "PHRASAL_VERBS",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "PHRASAL_VERB_ID"
+            ],
+            "referencedColumns": [
+              "ID"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "EXAMPLES",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `DEFINITION_ID` INTEGER NOT NULL, `EXAMPLE` TEXT, `TRANSLATION` TEXT, FOREIGN KEY(`DEFINITION_ID`) REFERENCES `DEFINITIONS`(`ID`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "ID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "definitionId",
+            "columnName": "DEFINITION_ID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "example",
+            "columnName": "EXAMPLE",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "translation",
+            "columnName": "TRANSLATION",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "ID"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_EXAMPLES_DEFINITION_ID",
+            "unique": false,
+            "columnNames": [
+              "DEFINITION_ID"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_EXAMPLES_DEFINITION_ID` ON `${TABLE_NAME}` (`DEFINITION_ID`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "DEFINITIONS",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "DEFINITION_ID"
+            ],
+            "referencedColumns": [
+              "ID"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a83404a90cec987a72d724012b223a00')"
+    ]
+  }
+}
