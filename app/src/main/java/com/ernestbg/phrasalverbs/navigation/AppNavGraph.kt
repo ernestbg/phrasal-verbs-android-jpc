@@ -16,11 +16,11 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
         modifier = modifier
     ) {
         composable("main_screen") {
-            //MainScreen(navController = navController)
+            MainScreen(navController = navController)
         }
         composable("phrasal_verb_detail/{phrasalVerbId}") { backStackEntry ->
             val phrasalVerbId = backStackEntry.arguments?.getString("phrasalVerbId")
-            phrasalVerbId?.let { PhrasalVerbDetailScreen(phrasalVerbId = it) }
+            PhrasalVerbDetailScreen(navController = navController, phrasalVerbId = phrasalVerbId)
         }
     }
 }

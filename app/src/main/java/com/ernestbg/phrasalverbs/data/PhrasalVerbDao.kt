@@ -12,12 +12,15 @@ import kotlinx.coroutines.flow.Flow
 interface PhrasalVerbDao {
     @Query(
         """
-        SELECT phrasal_verbs.HEADWORD AS headword, definitions.GUIDEWORD AS guideword
+        SELECT phrasal_verbs.ID AS id, phrasal_verbs.HEADWORD AS headword, definitions.GUIDEWORD AS guideword
         FROM phrasal_verbs
         LEFT JOIN definitions ON phrasal_verbs.ID = definitions.PHRASAL_VERB_ID
     """
     )
     fun getDictionaryEntries(): Flow<List<DictionaryEntry>>
+
+    @Query("SELECT * FROM PHRASAL_VERBS WHERE ID = :id")
+    suspend fun getPhrasalVerbById(id: Int): PhrasalVerb?
 }
 
 

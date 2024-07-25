@@ -2,6 +2,7 @@ package com.ernestbg.phrasalverbs.repository
 
 import com.ernestbg.phrasalverbs.data.PhrasalVerbDao
 import com.ernestbg.phrasalverbs.model.DictionaryEntry
+import com.ernestbg.phrasalverbs.model.PhrasalVerb
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.conflate
@@ -15,5 +16,9 @@ class AppRepository @Inject constructor(
         return phrasalVerbDao.getDictionaryEntries()
             .flowOn(Dispatchers.IO)
             .conflate()
+    }
+
+    suspend fun getPhrasalVerbById(id: Int): PhrasalVerb? {
+        return phrasalVerbDao.getPhrasalVerbById(id)
     }
 }

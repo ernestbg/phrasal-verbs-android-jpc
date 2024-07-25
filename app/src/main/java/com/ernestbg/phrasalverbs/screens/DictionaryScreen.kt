@@ -1,5 +1,6 @@
 package com.ernestbg.phrasalverbs.screens
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.ernestbg.phrasalverbs.components.DictionaryItem
 import com.ernestbg.phrasalverbs.components.SearchBar
 import com.ernestbg.phrasalverbs.view_models.DictionaryViewModel
@@ -23,17 +25,19 @@ import com.ernestbg.phrasalverbs.view_models.DictionaryViewModel
 @Composable
 fun DictionaryScreen(
     viewModel: DictionaryViewModel = hiltViewModel(),
+    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     val dictionaryEntries by viewModel.dictionaryEntries.observeAsState(emptyList())
     val query by viewModel.query.collectAsState()
 
     Column(modifier = modifier.fillMaxSize()) {
-        // El padding se aplica directamente al SearchBar si es necesario
         SearchBar(
             query = query,
             onQueryChanged = viewModel::onQueryChanged,
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp).background(Color.Yellow)
+            modifier = Modifier
+                .padding(horizontal = 8.dp, vertical = 8.dp)
+                .background(Color.Yellow)
         )
         LazyColumn(
             modifier = Modifier
@@ -41,7 +45,16 @@ fun DictionaryScreen(
                 .background(Color.LightGray)
         ) {
             items(dictionaryEntries) { entry ->
-                DictionaryItem(entry)
+                DictionaryItem(
+                    entry = entry,
+                    modifier = Modifier.padding(4.dp),
+                    onClick = {
+                        navController.navigate("phrasal_verb_detail/${entry.id}") {
+                            // Limpia la pila de navegación para que al volver a DictionaryScreen, no se mantenga PhrasalVerbDetailScreen
+                            popUpTo("dictionary_screen") { inclusive = true }
+                        }
+                    }
+                )
                 Divider(
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f),
                     thickness = 1.dp
