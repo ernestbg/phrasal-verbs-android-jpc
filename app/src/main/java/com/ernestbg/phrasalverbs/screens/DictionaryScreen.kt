@@ -20,6 +20,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.ernestbg.phrasalverbs.components.DictionaryItem
 import com.ernestbg.phrasalverbs.components.SearchBar
+import com.ernestbg.phrasalverbs.navigation.BottomNavItem
+import com.ernestbg.phrasalverbs.navigation.PhrasalVerbsScreens
 import com.ernestbg.phrasalverbs.view_models.DictionaryViewModel
 
 @Composable
@@ -37,12 +39,10 @@ fun DictionaryScreen(
             onQueryChanged = viewModel::onQueryChanged,
             modifier = Modifier
                 .padding(horizontal = 8.dp, vertical = 8.dp)
-                .background(Color.Yellow)
         )
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.LightGray)
         ) {
             items(dictionaryEntries) { entry ->
                 DictionaryItem(
@@ -50,8 +50,7 @@ fun DictionaryScreen(
                     modifier = Modifier.padding(4.dp),
                     onClick = {
                         navController.navigate("phrasal_verb_detail/${entry.id}") {
-                            // Limpia la pila de navegación para que al volver a DictionaryScreen, no se mantenga PhrasalVerbDetailScreen
-                            popUpTo("dictionary_screen") { inclusive = true }
+                            popUpTo(BottomNavItem.Dictionary.route) { inclusive = false }
                         }
                     }
                 )
