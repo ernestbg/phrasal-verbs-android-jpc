@@ -4,8 +4,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.ernestbg.phrasalverbs.model.DictionaryEntry
 import com.ernestbg.phrasalverbs.model.PhrasalVerb
+import com.ernestbg.phrasalverbs.model.PhrasalVerbWithDetails
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -19,9 +21,12 @@ interface PhrasalVerbDao {
     )
     fun getDictionaryEntries(): Flow<List<DictionaryEntry>>
 
-    @Query("SELECT * FROM PHRASAL_VERBS WHERE ID = :id")
-    suspend fun getPhrasalVerbById(id: Int): PhrasalVerb?
+
+    @Transaction
+    @Query("SELECT * FROM PHRASAL_VERBS WHERE ID = :phrasalVerbId")
+    suspend fun getPhrasalVerbWithDetails(phrasalVerbId: Int): PhrasalVerbWithDetails?
 }
+
 
 
 
