@@ -37,7 +37,6 @@ fun PhrasalVerbsApp() {
     val navController = rememberNavController()
 
     Scaffold(
-        topBar = { CenterAlignedTopAppBar() },
         bottomBar = { BottomNavigationBar(navController = navController) }
     ) { innerPadding ->
         Surface(

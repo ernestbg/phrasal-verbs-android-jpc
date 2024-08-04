@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.ernestbg.phrasalverbs.screens.DictionaryScreen
+import com.ernestbg.phrasalverbs.screens.FavoritesScreen
 import com.ernestbg.phrasalverbs.screens.LearnScreen
 import com.ernestbg.phrasalverbs.screens.PhrasalVerbDetailScreen
 import com.ernestbg.phrasalverbs.view_models.DictionaryViewModel
@@ -39,6 +40,9 @@ fun PhrasalVerbsNavigation(navController: NavHostController = rememberNavControl
                 navController = navController,
                 phrasalVerbId = phrasalVerbId
             )
+        }
+        composable(PhrasalVerbsScreens.FavoritesScreen.route) {
+            FavoritesScreen(navController = navController) // Nueva pantalla de favoritos
         }
     }
 }
