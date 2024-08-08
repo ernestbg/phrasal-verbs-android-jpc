@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a83404a90cec987a72d724012b223a00",
+    "identityHash": "470e0a2e5aad6686f0eb85c4c24ca3df",
     "entities": [
       {
         "tableName": "PHRASAL_VERBS",
@@ -38,7 +38,7 @@
       },
       {
         "tableName": "DEFINITIONS",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `PHRASAL_VERB_ID` INTEGER NOT NULL, `GUIDEWORD` TEXT, `DIALECT` TEXT, `REGISTER` TEXT, `DEFINITION` TEXT, `TRANSLATION` TEXT, `LEVEL` TEXT, FOREIGN KEY(`PHRASAL_VERB_ID`) REFERENCES `PHRASAL_VERBS`(`ID`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `PHRASAL_VERB_ID` INTEGER NOT NULL, `GUIDEWORD` TEXT, `DIALECT` TEXT, `REGISTER` TEXT, `DEFINITION` TEXT, `TRANSLATION` TEXT, `LEVEL` TEXT, `IS_FAVORITE` INTEGER NOT NULL, FOREIGN KEY(`PHRASAL_VERB_ID`) REFERENCES `PHRASAL_VERBS`(`ID`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -87,6 +87,12 @@
             "columnName": "LEVEL",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "isFavorite",
+            "columnName": "IS_FAVORITE",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -184,7 +190,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a83404a90cec987a72d724012b223a00')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '470e0a2e5aad6686f0eb85c4c24ca3df')"
     ]
   }
 }

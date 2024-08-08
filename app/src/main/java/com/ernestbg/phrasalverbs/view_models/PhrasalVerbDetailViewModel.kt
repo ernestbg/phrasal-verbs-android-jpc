@@ -1,5 +1,6 @@
 package com.ernestbg.phrasalverbs.view_models
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ernestbg.phrasalverbs.data.PhrasalVerbDao
@@ -24,6 +25,25 @@ class PhrasalVerbDetailViewModel @Inject constructor(
     fun getPhrasalVerbDetailsById(id: Int) {
         viewModelScope.launch {
             _phrasalVerbWithDetails.value = repository.getPhrasalVerbWithDetails(id)
+        }
+    }
+
+    fun toggleDefinitionFavorite(definitionId: Int) {
+        viewModelScope.launch {
+            _phrasalVerbWithDetails.value?.let { details ->
+                val updatedDefinitions = details.definitions.map { definitionWithExamples ->
+                    if (definitionWithExamples.definition.id == definitionId) {
+                        val updatedDefinition = definitionWithExamples.definition.copy(
+                            isFavorite = !definitionWithExamples.definition.isFavorite
+                        )
+                        definitionWithExamples.copy(definition = updatedDefinition)
+                    } else {
+                        definitionWithExamples
+                    }
+                }
+                _phrasalVerbWithDetails.value = details.copy(definitions = updatedDefinitions)
+                repository.updateDefinitionFavoriteStatus(definitionId, updatedDefinitions.find { it.definition.id == definitionId }?.definition?.isFavorite ?: false)
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ data class DefinitionWithExamples(
     @Relation(
         parentColumn = "ID",
         entityColumn = "DEFINITION_ID",
-        entity = Example::class // Indicar explícitamente la entidad
+        entity = Example::class
     )
     val examples: List<Example>
 )

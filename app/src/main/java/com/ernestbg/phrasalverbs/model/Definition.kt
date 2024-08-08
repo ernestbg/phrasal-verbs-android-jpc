@@ -42,5 +42,8 @@ data class Definition(
     val translation: String?,
 
     @ColumnInfo(name = "LEVEL")
-    val level: String?
+    val level: String?,
+
+    @ColumnInfo(name = "IS_FAVORITE")
+    val isFavorite: Boolean = false
 )

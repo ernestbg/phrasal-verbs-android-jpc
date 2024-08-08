@@ -1,5 +1,7 @@
 package com.ernestbg.phrasalverbs.repository
 
+import android.util.Log
+import com.ernestbg.phrasalverbs.data.DefinitionDao
 import com.ernestbg.phrasalverbs.data.PhrasalVerbDao
 import com.ernestbg.phrasalverbs.model.DictionaryEntry
 import com.ernestbg.phrasalverbs.model.PhrasalVerb
@@ -12,6 +14,8 @@ import javax.inject.Inject
 
 class AppRepository @Inject constructor(
     private val phrasalVerbDao: PhrasalVerbDao,
+    private val definitionDao: DefinitionDao
+
 ) {
     fun getDictionaryEntries(): Flow<List<DictionaryEntry>> {
         return phrasalVerbDao.getDictionaryEntries()
@@ -20,5 +24,8 @@ class AppRepository @Inject constructor(
     }
     suspend fun getPhrasalVerbWithDetails(phrasalVerbId: Int): PhrasalVerbWithDetails? {
         return phrasalVerbDao.getPhrasalVerbWithDetails(phrasalVerbId)
+    }
+    suspend fun updateDefinitionFavoriteStatus(definitionId: Int, isFavorite: Boolean) {
+        definitionDao.updateDefinitionFavoriteStatus(definitionId, if (isFavorite) 1 else 0)
     }
 }
