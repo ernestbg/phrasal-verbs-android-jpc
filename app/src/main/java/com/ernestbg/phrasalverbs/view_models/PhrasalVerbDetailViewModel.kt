@@ -28,13 +28,14 @@ class PhrasalVerbDetailViewModel @Inject constructor(
         }
     }
 
-    fun toggleDefinitionFavorite(definitionId: Int) {
+    fun toggleFavoriteStatus(definitionId: Int, currentIsFavorite: Boolean) {
         viewModelScope.launch {
+            repository.updateDefinitionFavoriteStatus(definitionId, !currentIsFavorite)
             _phrasalVerbWithDetails.value?.let { details ->
                 val updatedDefinitions = details.definitions.map { definitionWithExamples ->
                     if (definitionWithExamples.definition.id == definitionId) {
                         val updatedDefinition = definitionWithExamples.definition.copy(
-                            isFavorite = !definitionWithExamples.definition.isFavorite
+                            isFavorite = !currentIsFavorite
                         )
                         definitionWithExamples.copy(definition = updatedDefinition)
                     } else {
@@ -42,10 +43,10 @@ class PhrasalVerbDetailViewModel @Inject constructor(
                     }
                 }
                 _phrasalVerbWithDetails.value = details.copy(definitions = updatedDefinitions)
-                repository.updateDefinitionFavoriteStatus(definitionId, updatedDefinitions.find { it.definition.id == definitionId }?.definition?.isFavorite ?: false)
             }
         }
     }
+
 }
 
 

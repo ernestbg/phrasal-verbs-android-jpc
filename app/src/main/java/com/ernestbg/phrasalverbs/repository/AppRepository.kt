@@ -26,6 +26,6 @@ class AppRepository @Inject constructor(
         return phrasalVerbDao.getPhrasalVerbWithDetails(phrasalVerbId)
     }
     suspend fun updateDefinitionFavoriteStatus(definitionId: Int, isFavorite: Boolean) {
-        definitionDao.updateDefinitionFavoriteStatus(definitionId, if (isFavorite) 1 else 0)
+        definitionDao.updateDefinitionFavoriteStatus(definitionId, isFavorite)
     }
 }

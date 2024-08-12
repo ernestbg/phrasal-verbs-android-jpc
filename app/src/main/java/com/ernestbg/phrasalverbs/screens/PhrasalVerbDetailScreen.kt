@@ -79,17 +79,27 @@ fun PhrasalVerbDetailScreen(
                     DefinitionItem(
                         definitionWithExamples = definitionWithExamples,
                         onFavoriteDefinitionClick = {
-                            viewModel.toggleDefinitionFavorite(definitionWithExamples.definition.id)
+                            viewModel.toggleFavoriteStatus(
+                                definitionWithExamples.definition.id,
+                                definitionWithExamples.definition.isFavorite
+                            )
+                            Log.d(
+                                "PhrasalVerbDetailScreen",
+                                "Updated favorite status for definition ID: ${definitionWithExamples.definition.id}"
+                            )
                         }
                     )
                 }
             }
         } ?: run {
-            // Mostrar un indicador de carga
-            //CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+            // Mostrar un indicador de carga si no hay datos disponibles
+            // CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
         }
     }
 }
+
+
+
 
 
 
