@@ -28,13 +28,25 @@ fun DefinitionItem(
     onFavoriteDefinitionClick: () -> Unit
 ) {
     Column {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text = definitionWithExamples.definition.guideword ?: "No guideword",
-                style = MaterialTheme.typography.bodyMedium
-            )
+        Row(verticalAlignment = Alignment.Top) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = definitionWithExamples.definition.guideword ?: "No guideword",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = definitionWithExamples.definition.definition ?: "No definition",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+
             Spacer(modifier = Modifier.width(8.dp))
-            IconButton(onClick = onFavoriteDefinitionClick) {
+
+            IconButton(
+                onClick = onFavoriteDefinitionClick,
+                modifier = Modifier.align(Alignment.Top) // Alinea el icono con la parte superior del texto
+            ) {
                 Icon(
                     painter = if (definitionWithExamples.definition.isFavorite) {
                         painterResource(id = R.drawable.baseline_star_24)
@@ -45,8 +57,7 @@ fun DefinitionItem(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(text = definitionWithExamples.definition.definition ?: "No definition")
+
         Spacer(modifier = Modifier.height(8.dp))
 
         definitionWithExamples.examples.forEach { example ->

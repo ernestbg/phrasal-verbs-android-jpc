@@ -3,6 +3,7 @@ package com.ernestbg.phrasalverbs.repository
 import android.util.Log
 import com.ernestbg.phrasalverbs.data.DefinitionDao
 import com.ernestbg.phrasalverbs.data.PhrasalVerbDao
+import com.ernestbg.phrasalverbs.model.Definition
 import com.ernestbg.phrasalverbs.model.DictionaryEntry
 import com.ernestbg.phrasalverbs.model.PhrasalVerb
 import com.ernestbg.phrasalverbs.model.PhrasalVerbWithDetails
@@ -27,5 +28,9 @@ class AppRepository @Inject constructor(
     }
     suspend fun updateDefinitionFavoriteStatus(definitionId: Int, isFavorite: Boolean) {
         definitionDao.updateDefinitionFavoriteStatus(definitionId, isFavorite)
+    }
+
+    fun getFavoriteDefinitions(): Flow<List<Definition>> {
+        return definitionDao.getFavoriteDefinitions()
     }
 }

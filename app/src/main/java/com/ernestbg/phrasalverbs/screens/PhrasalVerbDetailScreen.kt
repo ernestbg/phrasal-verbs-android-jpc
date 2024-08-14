@@ -52,7 +52,7 @@ fun PhrasalVerbDetailScreen(
     Scaffold(
         topBar = {
             PhrasalVerbDetailTopBar(
-                onFavoriteClick = { navController.navigate(PhrasalVerbsScreens.FavoritesScreen.route) },
+                onFavoriteClick = { navController.navigate(PhrasalVerbsScreens.FavouritesScreen.route) },
                 onBackClick = { navController.popBackStack() }
             )
         }

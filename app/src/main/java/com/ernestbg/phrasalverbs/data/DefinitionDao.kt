@@ -11,4 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface DefinitionDao {
     @Query("UPDATE DEFINITIONS SET IS_FAVORITE = :isFavorite WHERE ID = :definitionId")
     suspend fun updateDefinitionFavoriteStatus(definitionId: Int, isFavorite: Boolean)
+
+    @Query("SELECT * FROM DEFINITIONS WHERE IS_FAVORITE = 1")
+    fun getFavoriteDefinitions(): Flow<List<Definition>>
 }
